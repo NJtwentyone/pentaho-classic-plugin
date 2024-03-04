@@ -11,7 +11,6 @@ import {
   HvLeftControl,
   HvRightControl,
   useHvData,
-  useHvSortBy,
   useHvGlobalFilter,
   useHvRowSelection,
   useHvBulkActions,
@@ -23,11 +22,6 @@ import { Kpi } from "components/listView/Kpi";
 import { Table } from "components/listView/Table";
 import { getColumns, actions, makeData } from "lib/utils/listView";
 import classes from "./styles";
-
-const idsToControl = {
-  cards: "cardsGrid",
-  list: "itemList",
-};
 
 const ListView = () => {
   const originalData = useMemo(() => makeData(25), []);
@@ -45,7 +39,6 @@ const ListView = () => {
     },
     useHvGlobalFilter,
     useHvFilters,
-    useHvSortBy,
     useHvPagination,
     useHvRowSelection,
     useHvBulkActions
@@ -73,6 +66,8 @@ const ListView = () => {
     return instance.initialRows.filter((r) => r.original.status === status)
       .length;
   };
+
+  const tableId = "list-view-table";
 
   return (
     <>
@@ -141,7 +136,7 @@ const ListView = () => {
           placeholder="Search"
           searchProps={{
             inputProps: {
-              "aria-controls": `${idsToControl.cards} ${idsToControl.list}`,
+              "aria-controls": tableId,
             },
           }}
         />
@@ -160,12 +155,12 @@ const ListView = () => {
         actionsDisabled={false}
         actionsCallback={handleAction}
         checkboxProps={{
-          "aria-controls": `${idsToControl.cards} ${idsToControl.list}`,
+          "aria-controls": tableId,
         }}
       />
 
       <div className={classes.marginTop}>
-        <Table instance={instance} isLoading={isLoading} />
+        <Table id={tableId} instance={instance} isLoading={isLoading} />
         {instance.page?.length ? (
           <HvPagination {...instance.getHvPaginationProps?.()} />
         ) : undefined}

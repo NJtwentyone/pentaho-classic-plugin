@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import {
   HvLoading,
   HvTableContainer,
@@ -11,9 +10,8 @@ import {
   HvTableInstance,
 } from "@hitachivantara/uikit-react-core";
 
-import { getColumns } from "lib/utils/listView";
-
 interface TableProps {
+  id?: string;
   instance: HvTableInstance<ListViewModel, string>;
   isLoading: boolean;
 }
@@ -24,19 +22,20 @@ interface TableProps {
  * @param {instance} Object the instance returned by the `useHvData` data.
  * @param {isLoading} boolean indicates whether or not the data is loading.
  */
-export const Table = ({ instance, isLoading }: TableProps) => {
-  const columns = useMemo(() => getColumns(), []);
-
+export const Table = ({ id, instance, isLoading }: TableProps) => {
   return (
     <HvTableContainer style={{ padding: "2px" }}>
-      <HvTable variant="listrow" {...instance.getTableProps()}>
+      <HvTable id={id} variant="listrow" {...instance.getTableProps()}>
         <HvTableHead>
-          <HvTableRow>
-            <HvTableCell variant="listcheckbox" />
-            {columns.map((col) => (
-              <HvTableHeader key={col.Header}>{col.Header}</HvTableHeader>
-            ))}
-          </HvTableRow>
+          {instance.headerGroups.map((headerGroup) => (
+            <HvTableRow {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((col) => (
+                <HvTableHeader {...col.getHeaderProps()} variant="default">
+                  {col.render("Header")}
+                </HvTableHeader>
+              ))}
+            </HvTableRow>
+          ))}
         </HvTableHead>
         {isLoading ? (
           <tbody>

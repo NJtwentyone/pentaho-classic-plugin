@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import {
   HvCard,
+  HvTableInstance,
   HvTypography,
   HvAtmosphereColorKeys,
   HvSemanticColorKeys,
@@ -18,7 +19,7 @@ interface KpiProps {
   color: HvAtmosphereColorKeys | HvSemanticColorKeys | "sema0" | undefined;
   variation: string;
   status: number;
-  instance: any;
+  instance: HvTableInstance<ListViewModel, string>;
   kpiSelection: number | undefined;
   setKpiSelection: (value: number | undefined) => void;
 }

@@ -1,10 +1,12 @@
 import "lib/i18n";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { HvProvider } from "@hitachivantara/uikit-react-core";
 import { Container } from "components/common";
 import { NavigationProvider } from "lib/context/NavigationContext";
 import navigation from "lib/navigation";
 import Routes from "lib/routes";
+
+import "virtual:uno.css";
 
 const App = () => (
   <Router>

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin title="Classic Plugin" name="classicPlugin">
   <overlays>
+    <!-- DEV comments: Dev tools web Tools : console>$('#createNewclassicPluginButtonButton').click() -->
     <overlay id="launch" resourcebundle="content/classicPlugin/resources/messages" priority="1">
       <button id="classicPluginButton" label="${openClassicPlugin}" command="window.parent.parent.mantle_openTab('${tabName}', '${tabName}', 'content/classicPlugin/webclient/index.html')"/>
+    </overlay>
+    <!-- DEV comments: in UI Navigate File > New > Classic Plugin -->
+    <overlay id="startup.classicPluginToolbar" resourcebundle="content/classicPlugin/resources/messages" priority="2">
+      <menubar id="newmenu">
+        <menuitem id="classicPluginButton" label="${openClassicPlugin}" command="mantleXulHandler.openUrl('${tabName}', '${tabName}', 'content/classicPlugin/webclient/index.html')"  type="MENU_ITEM" how="LAST_CHILD"/>
+      </menubar>
     </overlay>
   </overlays>
   <external-resources/>

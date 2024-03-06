@@ -18,7 +18,8 @@ i18n
     fallbackLng: "en",
     ns: [],
     backend: {
-      loadPath: "/locales/{{lng}}/{{ns}}.json",
+      // DEV hard coded "./" to use relative path, TODO look into passing in ${process.env.XYZ} or something dynamic
+      loadPath: "./locales/{{lng}}/{{ns}}.json",
     },
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
